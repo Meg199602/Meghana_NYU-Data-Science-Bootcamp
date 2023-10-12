@@ -1,0 +1,24 @@
+Database:
+Sales Table - [ Date, Order_id, Item_id, Customer_id, Quantity, Revenue ]
+Items Table – [ item_id, item_name, price, department ]
+Customers Table - [ Customer_id, first_name, last_name, address ]
+
+
+1. Pull total number of orders that were completed on 18th March 2023
+
+SELECT Date, COUNT(DISTINCT Order_id) as Total_no_Orders
+FROM Sales
+WHERE CAST(Date AS string) = "03-18-2023"
+GROUP BY Date
+
+2. Pull total number of orders that were completed on 18th March 2023 with the first name ‘John’ and last name ‘Doe’
+
+SELECT S.Date, S.Customer_id, C.first_name, C.last_name, COUNT(DISTINCT S.Order_id) as Total_no_Orders
+FROM Sales as S
+JOIN Customers as C
+ON S.Customer_id = C.Customer_ID
+WHERE UPPER(C.first_name) = "JOHN" AND UPPER(C.last_name) = "DOE"
+AND CAST(Date AS string) = "03-18-2023"
+GROUP BY S.Customer_id
+
+3.
